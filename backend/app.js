@@ -20,6 +20,8 @@ let transRoute = require('./api/routes/transaction.route');
 let billRoute = require('./api/routes/bill.route');
 let cmtRoute = require('./api/routes/comment.route');
 let supportRoute = require('./api/routes/support.route');
+let logintRoute = require('./api/routes/login.route');
+
 
 //Handling CORS (Cross Origin Resource Sharing)
 app.use((req,res,next)=>{
@@ -36,6 +38,7 @@ app.use('/users', userRoute);
 app.use('/bills', billRoute);
 app.use('/comments', cmtRoute);
 app.use('/supports', supportRoute);
+app.use('/login', logintRoute);
 
 
 
