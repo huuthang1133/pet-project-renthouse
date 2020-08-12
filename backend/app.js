@@ -21,6 +21,7 @@ let billRoute = require('./api/routes/bill.route');
 let cmtRoute = require('./api/routes/comment.route');
 let supportRoute = require('./api/routes/support.route');
 let logintRoute = require('./api/routes/login.route');
+let roomRoute = require('./api.routes/room.route');
 
 
 //Handling CORS (Cross Origin Resource Sharing)
@@ -35,16 +36,11 @@ app.use((req,res,next)=>{
 app.get('/', (req, res) => res.send('Hello World!'));
 app.use('/transactions', transRoute);
 app.use('/users', userRoute);
+app.use('/rooms', roomRoute);
 app.use('/bills', billRoute);
 app.use('/comments', cmtRoute);
 app.use('/supports', supportRoute);
 app.use('/login', logintRoute);
-
-
-
-
-
-
 
 // Handling Errors
 app.use((req,res,next)=>{

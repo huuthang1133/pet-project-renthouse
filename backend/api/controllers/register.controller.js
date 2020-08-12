@@ -1,6 +1,6 @@
 const User = require('../models/user.model');
 
-module.exports.createUser = (req, res)=>{
+module.exports.postRegister = (req, res)=>{
     const user = new User({
         username: req.body.username,
         password: req.body.passpord,
