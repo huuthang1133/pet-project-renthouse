@@ -25,7 +25,7 @@ let logintRoute = require('./api/routes/login.route');
 
 //Handling CORS (Cross Origin Resource Sharing)
 app.use((req,res,next)=>{
-    res.header('Access-Control-Allow-Origin', 'https://0ph5c.csb.app/');
+    res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Headers','Origin, X-Requested-With, Accept, Content-Type, Authorization')
     res.header('Access-Control-Allow-Methods', 'POST, GET, PUT, PATCH, DELETE')
     next()
