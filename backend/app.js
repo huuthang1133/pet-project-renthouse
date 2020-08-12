@@ -21,7 +21,7 @@ let billRoute = require('./api/routes/bill.route');
 let cmtRoute = require('./api/routes/comment.route');
 let supportRoute = require('./api/routes/support.route');
 let logintRoute = require('./api/routes/login.route');
-let roomRoute = require('./api.routes/room.route');
+let roomRoute = require('./api/routes/room.route');
 
 
 //Handling CORS (Cross Origin Resource Sharing)
