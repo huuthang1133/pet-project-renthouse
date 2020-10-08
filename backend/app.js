@@ -2,6 +2,10 @@ require('dotenv').config()
 const express = require('express')
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser')
+var cors = require('cors')
+const app = express()
+
+app.use(cors())
 
 mongoose.connect(process.env.MONGOOSE_URL, {useNewUrlParser: true,
     useUnifiedTopology: true})
@@ -10,7 +14,6 @@ mongoose.connect(process.env.MONGOOSE_URL, {useNewUrlParser: true,
 //     console.log('conneted')
 // })
 
-const app = express()
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 const port = process.env.PORT || 3000

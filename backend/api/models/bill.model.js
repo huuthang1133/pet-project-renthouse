@@ -1,8 +1,11 @@
 const mongoose = require('mongoose');
 
 const billsSchema = mongoose.Schema({
-    name: String,
-    price: String,
+    price: {
+    	Dien: String,
+    	Nuoc: String,
+    	Phong: String
+    },
     isComplete: Boolean,
     transactionId: String,
     bill_date: String,

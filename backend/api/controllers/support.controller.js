@@ -4,7 +4,7 @@ module.exports.getAll = (req, res)=>{
     Support.find()
     .exec()
     .then(docs =>{
-        console.log(docs)
+        // console.log(docs)
         res.status(200).json(docs)
     })
     .catch(err => {

@@ -12,17 +12,32 @@ module.exports.getAll = (req, res)=>{
         res.status(500).json({
             error : err
         })
-    })
+    })        
+}
+
+module.exports.getBill = async (req,res) => {
+    const bill = await Bill.find({ transactionId: req.params.id})
+    // .exec()
+    // .then(docs =>{
+    //     // console.log(docs)
+    //     res.status(200).json(docs)
+    // })
+    // .catch(err => {
+    //     console.log(err);
+    //     res.status(500).json({
+    //         error : err
+    //     })
+    // })  
+
+    console.log(bill)  
 }
 
 module.exports.createBills = (req, res)=>{
     const bill = new Bill({
-        name: req.body.name,
         price: req.body.price,
         isComplete: false,
         transactionId: req.body.transactionId,
         bill_date: req.body.bill_date,
-        idComment: req.body.idComment
     })
     bill.save()
     .then(result=>{
