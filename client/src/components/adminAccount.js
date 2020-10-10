@@ -1,5 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
+import { ToastContainer } from 'react-toastify';
+import { LoginContext } from "../contexts/LogIn";
 import {
   Container,
   Row,
@@ -19,6 +21,7 @@ import {
 } from "reactstrap";
 
 export default function AdminAccount({ history }) {
+  const {notify} = useContext(LoginContext)
   const [user, setUser] = useState('')
   const [transaction, setTransaction] = useState([]);
   const [transactions, setTransactions] = useState([]);
@@ -37,13 +40,14 @@ export default function AdminAccount({ history }) {
 
   useEffect(
     () => {
+      setUser(JSON.parse(localStorage.getItem("user")))
+      notify()
       axios
         .get("https://pet-project-renthouse.herokuapp.com/transactions")
         .then((res) => setTransactions(res.data));
       axios
         .get("https://pet-project-renthouse.herokuapp.com/supports")
         .then((res) => setSupports(res.data));
-      setUser(JSON.parse(localStorage.getItem("user")))
     },
     [transaction],
     [supports],
@@ -126,6 +130,7 @@ export default function AdminAccount({ history }) {
   };
   return (
     <Container>
+      <ToastContainer />
       <div>
         <h2>Hi {user.fullName}</h2>
         <h2>DANH SÁCH PHÒNG TRỌ ĐANG CHO THUÊ</h2>

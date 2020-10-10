@@ -2,6 +2,8 @@ import React, { useContext } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 import { LoginContext } from "../contexts/LogIn";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function FormLogin() {
   const {
@@ -10,7 +12,8 @@ export default function FormLogin() {
     onChange1,
     onChange2,
     handleLogin,
-    user
+    user,
+    notify
   } = useContext(LoginContext);
   if (user) {
     if (user.isAdmin) {
@@ -23,7 +26,6 @@ export default function FormLogin() {
       style={{
         paddingTop: 10
       }}
-      onSubmit={handleLogin}
     >
       <h1>Log In</h1>
       <FormGroup>
@@ -46,9 +48,16 @@ export default function FormLogin() {
           onChange={onChange2}
         />
       </FormGroup>
-      <Button color="primary" disabled={!(isFilledUsername && isPassword)}>
-        Log In
-      </Button>
+      <div>
+        <Button 
+          color="primary" 
+          disabled={!(isFilledUsername && isPassword)}
+          onClick={handleLogin}
+        >
+          Log In
+        </Button>
+        <ToastContainer />
+      </div>
       <div
         style={{
           marginTop: 10
