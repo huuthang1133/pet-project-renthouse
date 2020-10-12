@@ -52,11 +52,12 @@ export default function FormLogin() {
         <Button 
           color="primary" 
           disabled={!(isFilledUsername && isPassword)}
-          onClick={handleLogin}
+          onClick={(e) => {
+            handleLogin(e, notify)
+          }}
         >
           Log In
         </Button>
-        <ToastContainer />
       </div>
       <div
         style={{

@@ -34,7 +34,7 @@ export function LoginProvider({ children }) {
   };
   const handleLogin = async (e, notify) => {
     e.preventDefault();
-    const res = await axios.post("http://localhost:9081/login", {
+    const res = await axios.post("https://pet-project-renthouse.herokuapp.com/login", {
       username,
       password
     });
@@ -42,6 +42,7 @@ export function LoginProvider({ children }) {
       localStorage.setItem("cool-jwt", res.data.accessToken);
       localStorage.setItem("user", JSON.stringify(res.data.user));
       setUser(JSON.parse(localStorage.getItem("user")));
+      notify()
     }
     else {
       notify1(res.data.message)
