@@ -6,13 +6,15 @@ This is MERN stack application. It is a small social network app that includes a
 
 ## Auth
 
-Login User
+* Login User
+* Register User
 
 # Posts
 
 * Post Supports
 * Post Comments
 * Post Bills
+* Post newUser
 
 # Edit
 
@@ -22,7 +24,10 @@ Login User
 [Pet-Renthouse](https://pet-project-renthouse.herokuapp.com/)
 
 # Link Demo
-[Pet-Renthouse](https://2dp6i.csb.app/)
+[Pet-Renthouse](https://5l4zc.csb.app/)
+* Account:
+* Username: admin, password: 123456
+* Username: huuthang113, password: 123456
 
 # Quick Start
 ## Add a default.json file in config folder with the following:
