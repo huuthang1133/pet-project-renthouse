@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import { link } from '../const/const'
 import {
   Col,
   Card,
@@ -27,7 +27,7 @@ const TransactionListItem = ({ transaction }) => {
   };
   const getSupport = async (e, transaction) => {
     if (support) {
-      const res = axios.post("https://pet-project-renthouse.herokuapp.com/supports", {
+      const res = axios.post(`${link}/supports`, {
         content: support,
         transactionId: transaction._id
       });
@@ -38,7 +38,7 @@ const TransactionListItem = ({ transaction }) => {
   const getComment = async (e, transaction, bill) => {
     if (comment) {
       const res = axios.patch(
-        `https://pet-project-renthouse.herokuapp.com/transactions/updatebill/${transaction._id}`,
+        `${link}/transactions/updatebill/${transaction._id}`,
         {
           content: comment,
           billId: bill._id

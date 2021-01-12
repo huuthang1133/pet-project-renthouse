@@ -24,7 +24,7 @@ export default function Room({ history }) {
     axios
       .post("https://pet-project-renthouse.herokuapp.com/transactions", {
         username: JSON.parse(localStorage.getItem("user")).username,
-        room: room
+        room
       })
     history.push("/account");
   };

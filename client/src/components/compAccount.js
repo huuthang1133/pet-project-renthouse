@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Container } from "reactstrap";
+import { link } from '../const/const'
 
 import TransactionList from "./TransactionList";
 
@@ -9,11 +10,11 @@ export default function CompAccount({ history }) {
   const [transactions, setTransactions] = useState([]);
   useEffect(() => {
     axios
-      .get(`https://pet-project-renthouse.herokuapp.com/transactions/${user.userId}`)
+      .get(`${link}/transactions/${user.userId}`)
       .then((res) => {
         setTransactions(res.data);
       });
-  }, []);
+  }, [transactions], [user]);
   return (
     <Container>
       <div>

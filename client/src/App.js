@@ -1,16 +1,20 @@
 import React from "react";
 import Routes from "./routes";
-import { LoginProvider } from "./contexts/LogIn";
+import { LoginProvider, } from "./contexts/LogIn";
+import { RegisterProvider, } from "./contexts/Register";
 import { ToastContainer } from 'react-toastify';
 
 
 export default function App() {
   return (
     <div className="App">
-      <LoginProvider>
-        <ToastContainer />
-        <Routes />
-      </LoginProvider>
+      <RegisterProvider>
+        <LoginProvider>
+          <ToastContainer />
+          <Routes />
+        </LoginProvider>
+      </RegisterProvider>
+
     </div>
   );
 }

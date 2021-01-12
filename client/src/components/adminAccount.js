@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
+import { link } from '../const/const'
 import { LoginContext } from "../contexts/LogIn";
 import {
   Container,
@@ -20,7 +21,7 @@ import {
 } from "reactstrap";
 
 export default function AdminAccount({ history }) {
-  const [user, setUser] = useState('')
+  const [token, setToken] = useState('')
   const [transaction, setTransaction] = useState([]);
   const [transactions, setTransactions] = useState([]);
   const [supports, setSupports] = useState([]);
@@ -35,39 +36,42 @@ export default function AdminAccount({ history }) {
   const [isComplete, setisComplete] = useState(false);
   const toggle = () => setModal(!modal);
   const toggle1 = () => setModal1(!modal1);
+  const { user } = useContext(LoginContext)
+  
 
   useEffect(
     () => {
-      setUser(JSON.parse(localStorage.getItem("user")))
+      setToken(localStorage.getItem("cool-jwt"))
+      // setUser(JSON.parse(localStorage.getItem("user")))
       axios
-        .get("https://pet-project-renthouse.herokuapp.com/transactions")
+        .get(`${link}/transactions`)
         .then((res) => setTransactions(res.data));
       axios
-        .get("https://pet-project-renthouse.herokuapp.com/supports")
+        .get(`${link}/supports`)
         .then((res) => setSupports(res.data));
     },
     [transaction],
+    [transactions],
     [supports],
     [user]
   );
-
-  const onChange1 = (e) => {
+  const onChangeElectric = (e) => {
     setElectric(e.target.value);
   };
 
-  const onChange2 = (e) => {
+  const onChangeWater = (e) => {
     setWater(e.target.value);
   };
 
-  const onChange3 = (e) => {
+  const onChangeRoom = (e) => {
     setRoom(e.target.value);
   };
 
-  const onChange4 = (e) => {
+  const onChangeBillDate = (e) => {
     setBillDate(e.target.value);
   };
 
-  const onChange5 = (e) => {
+  const onChangeComplete = (e) => {
     setisComplete(!isComplete);
   };
 
@@ -85,23 +89,22 @@ export default function AdminAccount({ history }) {
     e.preventDefault();
     if (electric.length || water.length) {
       const res = await axios.patch(
-        `https://pet-project-renthouse.herokuapp.com/transactions/updatebill/${currentTransaction}`,
+        `${link}/transactions/updatebill/${currentTransaction}`,
         {
           billId: currentBill,
           electric,
           water
-        }
+        }, { headers: {Authorization: token} }
       );
       toggle1();
       setTransaction(res.data);
     }
-    console.log(isComplete)
     if (isComplete) {
       const res = await axios.patch(
-        `https://pet-project-renthouse.herokuapp.com/transactions/updatebill/${currentTransaction}`,
+        `${link}/transactions/updatebill/${currentTransaction}`,
         {
           billId: currentBill
-        }
+        }, { headers: {Authorization: token} }
       );
       toggle1();
       setTransaction(res.data);
@@ -116,15 +119,16 @@ export default function AdminAccount({ history }) {
       room
     };
     const res = await axios.patch(
-      `https://pet-project-renthouse.herokuapp.com/transactions/${currentTransaction}`,
+      `${link}/transactions/${currentTransaction}`,
       {
         price,
         bill_date: bill_date
-      }
+      }, {headers: {Authorization: token}}
     );
     setTransaction(res.data);
     toggle();
   };
+
   return (
     <Container>
       <div>
@@ -146,7 +150,7 @@ export default function AdminAccount({ history }) {
                 {transaction.bills.map((bill) => (
                   <>
                     {!bill.isComplete ? (
-                      <CardBody className="b">
+                      <CardBody className="b" key={bill._id}>
                         <CardTitle>{bill.bill_date}</CardTitle>
                         <CardTitle>TIEN DIEN: {bill.price.electric}</CardTitle>
                         <CardTitle>TIEN NUOC: {bill.price.water}</CardTitle>
@@ -154,7 +158,7 @@ export default function AdminAccount({ history }) {
                         <CardTitle>TRANG THAI: CHUA THANH TOAN</CardTitle>
                         <>
                           {bill.comment.map((comment) => (
-                            <CardTitle>{comment.content}</CardTitle>
+                            <CardTitle key={comment._id}>{comment.content}</CardTitle>
                           ))}
                         </>
                         <div>
@@ -183,7 +187,7 @@ export default function AdminAccount({ history }) {
                                     name="electric"
                                     id="exampleUsername"
                                     placeholder="Tien dien"
-                                    onChange={onChange1}
+                                    onChange={onChangeElectric}
                                   />
                                 </FormGroup>
                                 <FormGroup>
@@ -193,7 +197,7 @@ export default function AdminAccount({ history }) {
                                     name="water"
                                     id="exampleUsername"
                                     placeholder="Tien nuoc"
-                                    onChange={onChange2}
+                                    onChange={onChangeWater}
                                   />
                                 </FormGroup>
                                 <Button
@@ -216,7 +220,7 @@ export default function AdminAccount({ history }) {
                                   <Label check>
                                     <Input
                                       type="checkbox"
-                                      onChange={onChange5}
+                                      onChange={onChangeComplete}
                                     />{" "}
                                     Đã Thanh Toán
                                   </Label>
@@ -280,7 +284,7 @@ export default function AdminAccount({ history }) {
                   name="electric"
                   id="exampleUsername"
                   placeholder="Tien dien"
-                  onChange={onChange1}
+                  onChange={onChangeElectric}
                 />
               </FormGroup>
               <FormGroup>
@@ -290,7 +294,7 @@ export default function AdminAccount({ history }) {
                   name="water"
                   id="examplePassword"
                   placeholder="Tien nuoc"
-                  onChange={onChange2}
+                  onChange={onChangeWater}
                 />
               </FormGroup>
               <FormGroup>
@@ -300,7 +304,7 @@ export default function AdminAccount({ history }) {
                   name="room"
                   id="examplePassword"
                   placeholder="Tien Phong"
-                  onChange={onChange3}
+                  onChange={onChangeRoom}
                 />
               </FormGroup>
               <FormGroup>
@@ -310,7 +314,7 @@ export default function AdminAccount({ history }) {
                   name="bill_date"
                   id="examplePassword"
                   placeholder="Ngay Thue"
-                  onChange={onChange4}
+                  onChange={onChangeBillDate}
                 />
               </FormGroup>
               <Button

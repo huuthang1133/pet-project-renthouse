@@ -8,7 +8,7 @@ export default function TopMenu(props) {
   const user = JSON.parse(localStorage.getItem("user"));
   return (
     <div>
-      <Navbar color="light" light expand="md">
+      <Navbar componentclass='span' color="light" light expand="md">
         <NavbarBrand href="/">Pet Project</NavbarBrand>
         <Nav className="ml-auto" navbar>
           <NavItem>
@@ -35,7 +35,7 @@ export default function TopMenu(props) {
           <NavItem>
             <NavLink>
               {!user && <Link to="/Login/">Log in</Link>}
-              {user && <Link onClick={onLogout}>Log out</Link>}
+              {user && <Link to="/" onClick={onLogout}>Log out</Link>}
             </NavLink>
           </NavItem>
         </Nav>

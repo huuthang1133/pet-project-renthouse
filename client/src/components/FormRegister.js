@@ -1,23 +1,21 @@
 import React, { useContext } from "react";
-import { Link, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import { Form, FormGroup, Label, Input, Button } from "reactstrap";
-import { LoginContext } from "../contexts/LogIn";
+import { RegisterContext } from "../contexts/Register";
 import 'react-toastify/dist/ReactToastify.css';
 
-export default function FormLogin() {
+export default function FormRegister() {
   const {
     isFilledUsername,
     isPassword,
     onChangeUsername,
     onChangePassword,
-    handleLogin,
+    onChangeFullname,
+    handleRegister,
     user,
     notify
-  } = useContext(LoginContext);
+  } = useContext(RegisterContext);
   if (user) {
-    if (user.isAdmin) {
-      return <Redirect to="/admin" />;
-    }
     return <Redirect to="/account" />;
   }
   return (
@@ -26,7 +24,7 @@ export default function FormLogin() {
         paddingTop: 10
       }}
     >
-      <h1>Log In</h1>
+      <h1>Register</h1>
       <FormGroup>
         <Label for="exampleUsername">Username</Label>
         <Input
@@ -47,23 +45,26 @@ export default function FormLogin() {
           onChange={onChangePassword}
         />
       </FormGroup>
+      <FormGroup>
+        <Label for="exampleFullname">Fullname</Label>
+        <Input
+          type="name"
+          name="fullname"
+          id="exampleFullname"
+          placeholder="Fullname"
+          onChange={onChangeFullname}
+        />
+      </FormGroup>      
       <div>
         <Button 
           color="primary" 
           disabled={!(isFilledUsername && isPassword)}
           onClick={(e) => {
-            handleLogin(e, notify)
+            handleRegister(e, notify)
           }}
         >
-          Log In
+          Register
         </Button>
-      </div>
-      <div
-        style={{
-          marginTop: 10
-        }}
-      >
-        Don't have an account ?<Link to="/register"> Register</Link>
       </div>
     </Form>
   );
