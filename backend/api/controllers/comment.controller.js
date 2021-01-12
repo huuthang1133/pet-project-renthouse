@@ -1,37 +1,27 @@
 const Comment = require('../models/comment.model');
 
-module.exports.getAll = (req, res)=>{
-    Comment.find()
-    .exec()
-    .then(docs =>{
-        console.log(docs)
+module.exports.getAll = async (req, res)=>{
+    try {
+        const docs = await Comment.find()
         res.status(200).json(docs)
-    })
-    .catch(err => {
-        console.log(err);
-        res.status(500).json({
-            error : err
-        })
-    })
+    } catch(err){
+        res.status(500).json({"Message": err.message})
+    }
 }
 
-module.exports.createCmts = (req, res)=>{
-    const comment = new Comment({
-        idUser: req.body.userId,
-        comment: req.body.comment,
-    })
-    comment.save()
-    .then(result=>{
-        res.status(201).json({
+module.exports.createCmts = async (req, res)=>{
+    try {
+        const comment = new Comment({
+            idUser: req.body.userId,
+            comment: req.body.comment,
+        })
+        await comment.save()
+        res.status(200).json({
             message: "Created post successfully"
-        })
-    })
-    .catch(err=>{
-        console.log(err);
-        res.status(500).json({
-            error: err
-        })
-    })
+        })       
+    } catch (err){
+        res.status(500).json({"Message": err.message})
+    }
 }
 
 module.exports.updateCmts = (req, res)=>{

@@ -1,50 +1,42 @@
 const Room = require('../models/room.model');
 
-module.exports.getAll = (req, res)=>{
-    Room.find()
-    .exec()
-    .then(docs =>{
+module.exports.getAll = async (req, res) => {
+    try {
+        const docs = await Room.find()
         res.status(200).json(docs)
-    })
-    .catch(err => {
-        console.log(err);
+    } catch(err){
         res.status(500).json({
-            error : err
+            "Message" : err.message
         })
-    })
+    }
 }
 
-module.exports.createRooms = (req, res)=>{
-    const room = new Room({
-        isVacancy: true,
-    })
-    room.save()
-    .then(result=>{
-        res.status(201).json({
+module.exports.createRooms = async (req, res) =>{
+    try { 
+        const room = new Room({
+            isVacancy: true,
+        })
+        await room.save()
+        res.status(200).json({
             message: "Created post successfully"
-        })
-    })
-    .catch(err=>{
-        console.log(err);
+        })            
+    } catch(err){
         res.status(500).json({
-            error: err
+            "Message": err.message
         })
-    })
+    }
 }
 
-module.exports.updateRooms = (req, res)=>{
-    const id = req.params.roomId
-    Room.update({_id: id},req.body)
-    .exec()
-    .then(result=>{
+module.exports.updateRooms = async (req, res) => {
+    try {
+        const id = req.params.roomId
+        await Room.updateOne({_id: id},req.body)
         res.status(200).json({
             message: "Post Updated"
-        })
-    })
-    .catch(err=>{
-        console.log(err);
+        })        
+    } catch (err) {
         res.status(500).json({
-            error: err
+            "Message": err.message
         })
-    })
+    }
 }
