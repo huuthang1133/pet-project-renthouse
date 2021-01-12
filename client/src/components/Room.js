@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+
+import { link } from '../const/const'
 import {
   Container,
   Row,
@@ -15,14 +17,14 @@ import axios from "axios";
 export default function Room({ history }) {
   const [rooms, setRooms] = useState([]);
   useEffect(() => {
-    axios.get("https://pet-project-renthouse.herokuapp.com/rooms").then((res) => {
+    axios.get(`${link}/rooms`).then((res) => {
       setRooms(res.data);
     });
   });
 
   const hireRoom = (room) => {
     axios
-      .post("https://pet-project-renthouse.herokuapp.com/transactions", {
+      .post(`${link}/transactions`, {
         username: JSON.parse(localStorage.getItem("user")).username,
         room
       })
@@ -33,7 +35,7 @@ export default function Room({ history }) {
       <h1 style={{ textAlign: "center" }}>DANH SÁCH PHÒNG TRỌ</h1>
       <Row>
         {rooms.map((room) => (
-          <Col sm="4">
+          <Col sm="4" key={room._id}>
             <Card style={{ marginTop: 10 }}>
               <CardImg
                 top

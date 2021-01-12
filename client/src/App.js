@@ -1,7 +1,8 @@
 import React from "react";
 import Routes from "./routes";
+import "bootstrap/dist/css/bootstrap.min.css";
 import { LoginProvider, } from "./contexts/LogIn";
-import { RegisterProvider, } from "./contexts/Register";
+import { RegisterProvider } from "./contexts/Register";
 import { ToastContainer } from 'react-toastify';
 
 
