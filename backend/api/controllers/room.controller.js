@@ -5,8 +5,8 @@ module.exports.getAll = async (req, res) => {
         const docs = await Room.find()
         res.status(200).json(docs)
     } catch(err){
-        res.status(500).json({
-            "Message" : err.message
+        return res.status(500).json({
+            msg : err.message
         })
     }
 }

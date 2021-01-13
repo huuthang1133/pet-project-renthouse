@@ -42,7 +42,7 @@ module.exports.createTrans = async (req, res)=>{
             isVacancy: false
         })
         
-        res.status(200).json({msg: "Transaction Created", docs})
+        res.status(200).json({msg: "Transaction Created", transaction})
     } catch (err){
         res.status(500).json({"Message": err.message})
     }

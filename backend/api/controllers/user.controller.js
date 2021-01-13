@@ -14,7 +14,6 @@ module.exports.getAll = async (req, res)=>{
 module.exports.createUser = async (req, res) =>{
     try {
         const { username, password, fullName } = req.body
-        console.log(username, password, fullName)
         const user = await User.findOne({username})
         if(user) return res.status(200).json({message: "The username already exists"})
         if(password.length < 6) return res.status(200).json({message: "Password is at least 6 characters"})
