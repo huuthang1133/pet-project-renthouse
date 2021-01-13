@@ -42,7 +42,6 @@ export default function AdminAccount({ history }) {
   useEffect(
     () => {
       setToken(localStorage.getItem("cool-jwt"))
-      // setUser(JSON.parse(localStorage.getItem("user")))
       axios
         .get(`${link}/transactions`)
         .then((res) => setTransactions(res.data));

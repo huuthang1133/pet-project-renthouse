@@ -24,7 +24,7 @@ This is MERN stack application. It is a small social network app that includes a
 [Pet-Renthouse](https://pet-project-renthouse.herokuapp.com/)
 
 # Link Demo
-[Pet-Renthouse](https://5l4zc.csb.app/)
+[Pet-Renthouse](https://0cpxw.csb.app/)
 * Account:
 * Username: admin, password: 123456
 * Username: huuthang113, password: 123456
