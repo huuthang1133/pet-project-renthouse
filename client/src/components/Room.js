@@ -20,28 +20,29 @@ export default function Room({ history }) {
   const notify = () => toast.success("Hire room Successfully !");
   const notify1 = (message) => toast.error(message);
 
-  const [rooms, setRooms] = useState([]);
+  const [transaction, setTransaction] = useState([]);
+  const [rooms, setRooms] = useState([])
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")))
+  const [token, setToken] = useState(localStorage.getItem("cool-jwt"))
   useEffect(() => {
-    setUser(JSON.parse(localStorage.getItem("user")))
     axios.get(`${link}/rooms`).then((res) => {
       setRooms(res.data);
     });
-  });
+  }, [transaction]);
 
-  const hireRoom = (room) => {
+  const hireRoom = async (room) => {
     if(!user){
       notify1('Please login to hire room.')
       return history.push('/login')
     }
     if(user && !user.isAdmin){
-      axios
-        .post(`${link}/transactions`, {
+      console.log(user.username, room)
+      const res = await axios.post(`${link}/transactions`, {
           username: user.username,
           room
-        })
+        }, { headers: {Authorization: token}})
+      setTransaction(res.data)
       notify()
-      return history.push("/account");
     }
     return null
   };

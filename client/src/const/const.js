@@ -1,1 +1,3 @@
-export const link = 'https://pet-project-renthouse.herokuapp.com'
+export const link = 'http://pet-project-renthouse.herokuapp.com'
+
+

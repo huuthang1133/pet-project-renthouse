@@ -18,6 +18,7 @@ const TransactionListItem = ({ transaction }) => {
   const [comment, setComment] = useState("");
   const [support, setSupport] = useState("");
   const [transactions, setTransactions] = useState(transaction);
+  const [token, setToken] = useState(localStorage.getItem('cool-jwt'))
 
   const onChange1 = (e) => {
     setSupport(e.target.value);
@@ -30,7 +31,7 @@ const TransactionListItem = ({ transaction }) => {
       const res = axios.post(`${link}/supports`, {
         content: support,
         transactionId: transaction._id
-      });
+      }, {headers: {Authorization: token}});
       setTransactions(res.data);
       setSupport("");
     }

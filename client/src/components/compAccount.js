@@ -8,15 +8,14 @@ import TransactionList from "./TransactionList";
 export default function CompAccount({ history }) {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
   const [transactions, setTransactions] = useState([]);
+
   useEffect(() => {
-    if(user){
-        axios
-        .get(`${link}/transactions/${user.userId}`)
-        .then((res) => {
-          setTransactions(res.data);
+    axios
+      .get(`${link}/transactions/${user.userId}`)
+      .then((res) => {
+        setTransactions(res.data);
       });
-    }
-  }, [transactions], [user]);
+  }, []);
   return (
     <Container>
       <div>
