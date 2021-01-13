@@ -2,13 +2,14 @@ import React, { useContext } from "react";
 import { Navbar, NavbarBrand, Nav, NavItem, NavLink } from "reactstrap";
 import { Link } from "react-router-dom";
 import { LoginContext } from "../contexts/LogIn";
+import { RegisterContext } from "../contexts/Register";
 
 export default function TopMenu(props) {
-  const { onLogout } = useContext(LoginContext);
-  const user = JSON.parse(localStorage.getItem("user"));
+  const { onLogout, user } = useContext(LoginContext);
+  const { jwt } = useContext(RegisterContext)
   return (
     <div>
-      <Navbar componentclass='span' color="light" light expand="md">
+      <Navbar color="light" light expand="md">
         <NavbarBrand href="/">Pet Project</NavbarBrand>
         <Nav className="ml-auto" navbar>
           <NavItem>
@@ -34,8 +35,8 @@ export default function TopMenu(props) {
 
           <NavItem>
             <NavLink>
-              {!user && <Link to="/Login/">Log in</Link>}
-              {user && <Link to="/" onClick={onLogout}>Log out</Link>}
+              {(!user && !jwt) && <Link to="/login/">Log in</Link>}
+              {(user || jwt) && <Link to="/" onClick={onLogout}>Log out</Link>}
             </NavLink>
           </NavItem>
         </Nav>

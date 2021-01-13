@@ -42,7 +42,7 @@ export function LoginProvider({ children }) {
     if(res.data.accesstoken){
       localStorage.setItem("cool-jwt", res.data.accesstoken);
       localStorage.setItem("user", JSON.stringify(res.data.user));
-      setUser(JSON.parse(localStorage.getItem("user")));
+      setUser(res.data.user);
       setToken(localStorage.getItem("cool-jwt"));
       notify()
     }

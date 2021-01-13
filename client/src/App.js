@@ -15,7 +15,6 @@ export default function App() {
           <Routes />
         </LoginProvider>
       </RegisterProvider>
-
     </div>
   );
 }

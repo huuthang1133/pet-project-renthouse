@@ -13,6 +13,7 @@ export function RegisterProvider({ children }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [fullName, setFullname] = useState("");
+  const [jwt, setJWT] = useState("")
 
   const notify = () => toast.success("Register Successfully !");
   const notify1 = (message) => toast.error(message);
@@ -46,6 +47,7 @@ export function RegisterProvider({ children }) {
       localStorage.setItem("cool-jwt", res.data.accesstoken);
       localStorage.setItem("user", JSON.stringify(res.data.user));
       setUser(JSON.parse(localStorage.getItem("user")));
+      setJWT(res.data.accesstoken)
       notify()
     }
     else {
@@ -62,7 +64,8 @@ export function RegisterProvider({ children }) {
         onChangePassword,
         onChangeFullname,
         handleRegister,
-        notify
+        notify,
+        jwt
       }}
     >
       {children}

@@ -13,22 +13,37 @@ import {
   Button
 } from "reactstrap";
 import axios from "axios";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Room({ history }) {
+  const notify = () => toast.success("Hire room Successfully !");
+  const notify1 = (message) => toast.error(message);
+
   const [rooms, setRooms] = useState([]);
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")))
   useEffect(() => {
+    setUser(JSON.parse(localStorage.getItem("user")))
     axios.get(`${link}/rooms`).then((res) => {
       setRooms(res.data);
     });
   });
 
   const hireRoom = (room) => {
-    axios
-      .post(`${link}/transactions`, {
-        username: JSON.parse(localStorage.getItem("user")).username,
-        room
-      })
-    history.push("/account");
+    if(!user){
+      notify1('Please login to hire room.')
+      return history.push('/login')
+    }
+    if(user && !user.isAdmin){
+      axios
+        .post(`${link}/transactions`, {
+          username: user.username,
+          room
+        })
+      notify()
+      return history.push("/account");
+    }
+    return null
   };
   return (
     <Container style={{ marginTop: 15 }}>
