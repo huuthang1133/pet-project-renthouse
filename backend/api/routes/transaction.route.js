@@ -9,6 +9,6 @@ router.get('/:userId', tranController.getTrans)
 router.post('/', auth, tranController.createTrans)
 router.delete('/:transactionId', auth, authAdmin, tranController.deleteTrans)
 router.patch('/:transactionId', auth, tranController.updateTrans)
-router.patch('/updatebill/:transactionId', auth, authAdmin, tranController.updateBill)
+router.patch('/updatebill/:transactionId', auth,  tranController.updateBill)
 
 module.exports = router
