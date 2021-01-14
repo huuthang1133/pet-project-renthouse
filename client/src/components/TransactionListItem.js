@@ -43,7 +43,8 @@ const TransactionListItem = ({ transaction }) => {
         {
           content: comment,
           billId: bill._id
-        }
+        },
+        {headers: {Authorization: token}}
       );
       setTransactions(res.data);
       setComment("");
