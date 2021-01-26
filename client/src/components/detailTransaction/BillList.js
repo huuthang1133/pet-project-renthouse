@@ -1,8 +1,8 @@
-import Axios from 'axios'
 import React, {useContext, useState} from 'react'
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Input, FormGroup, Label, Form } from 'reactstrap'
 import axios from 'axios'
 import {GlobalState} from '../../GlobalState'
+import {link} from '../../const'
 
 export default function BillList({bill, callback, setCallback, token}){
     const state = useContext(GlobalState)
@@ -22,7 +22,7 @@ export default function BillList({bill, callback, setCallback, token}){
 
     const handlePayment = async () => {
         alert('Bạn chắc chắn đã thanh toán hóa đơn này?')
-        await axios.get(`/bills/payment/${bill._id}`, {
+        await axios.get(`${link}/bills/payment/${bill._id}`, {
             headers: {Authorization: token}
         })
         setCallback(!callback)
@@ -33,7 +33,7 @@ export default function BillList({bill, callback, setCallback, token}){
     }
 
     const submitComment = async (func) => {
-        await axios.patch(`/bills/comment/${bill._id}`, {comment}, {
+        await axios.patch(`${link}/bills/comment/${bill._id}`, {comment}, {
             headers: {
                 Authorization: token
             }
@@ -44,7 +44,7 @@ export default function BillList({bill, callback, setCallback, token}){
 
     const confirmBill = async () => {
         alert("Bạn đã nhận được khoản thanh toán cho hóa đơn này?")
-        await axios.get(`/bills/confirm/${bill._id}`, {
+        await axios.get(`${link}/bills/confirm/${bill._id}`, {
             headers: {Authorization: token}
         })
         setCallback(!callback)
@@ -52,7 +52,7 @@ export default function BillList({bill, callback, setCallback, token}){
 
     const updateBill = async (e, func) => {
         e.preventDefault()
-        await axios.patch(`/bills/${bill._id}`, price, {
+        await axios.patch(`${link}/bills/${bill._id}`, price, {
             headers: {Authorization: token}
         })
         func()

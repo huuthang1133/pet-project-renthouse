@@ -11,6 +11,7 @@ import {
     Button
   } from "reactstrap";
 import { Link } from 'react-router-dom'
+import {link} from '../../const'
 
 export default function RoomItem({room}){
     const state = useContext(GlobalState)
@@ -21,7 +22,7 @@ export default function RoomItem({room}){
         try {
             e.preventDefault()
             alert('Bạn đã quyết định thuê phòng này ?')
-            const res = await axios.post(`/transactions`, { id: room._id},{
+            const res = await axios.post(`${link}/transactions`, { id: room._id},{
                 headers: {Authorization: token}
             })
             alert(res.data.msg)

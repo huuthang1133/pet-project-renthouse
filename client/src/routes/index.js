@@ -1,7 +1,7 @@
 import React, {useContext} from "react";
 import {GlobalState} from '../GlobalState'
 import { BrowserRouter as Router, Switch, Redirect } from "react-router-dom";
-import { Home, LogIn, Account, Admin, Register, DetailRoomPage } from "../pages";
+import { Home, LogIn, Account, Register, DetailRoomPage } from "../pages";
 import { TopMenu, detailTransaction, detailSupport } from "../components";
 import PublicRoute from "./publicRoute";
 import PrivateRoute from "./privateRoute";

@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react'
+import React, {useContext } from 'react'
 import {GlobalState} from '../../GlobalState'
 import {Table, Container} from 'reactstrap'
 import SupportList from './SupportList'
@@ -6,7 +6,7 @@ import SupportList from './SupportList'
 
 export default function DetailSupport() {
     const state = useContext(GlobalState)
-    const [supports, setSupports] = state.supports
+    const [supports] = state.supports
     const [isAdmin] = state.userAPI.isAdmin
 
     if(!supports.length) return <h2>BẠN CHƯA TẠO YÊU CẦU HỖ TRỢ</h2>

@@ -4,16 +4,16 @@ import { Navbar, NavbarBrand, Nav, NavItem, NavLink } from "reactstrap";
 import { Link } from "react-router-dom";
 import {GlobalState} from '../../GlobalState'
 import './TopMenu.css'
+import {link} from '../../const'
 
 export default function TopMenu() {
   const state = useContext(GlobalState)
   const [isAdmin] = state.userAPI.isAdmin
   const [isLogged] = state.userAPI.isLogged
-  const [callback, setCallback] = state.callback
 
   const onLogout = async () => {
     localStorage.clear()
-    await axios.get(`/users/logout`)
+    await axios.get(`${link}/users/logout`)
     window.location.href = '/'
   }
 

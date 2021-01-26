@@ -1,29 +1,30 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Table } from 'reactstrap';
 import {GlobalState} from '../../GlobalState'
 import TransactionList from '../TransactionList'
 import axios from 'axios'
 import './compAccount'
+import {link} from '../../const'
 
 export default function CompAccount(){
 
     const state = useContext(GlobalState)
-    const [isLogged, setIsLogged] = state.userAPI.isLogged
+    const [isLogged] = state.userAPI.isLogged
     const [isAdmin] = state.userAPI.isAdmin
     const [token] = state.token
     const [transactions, setTransactions] = state.transactions
-    const [callback, setCallback] = state.callback
+    const [callback] = state.callback
 
     useEffect(()=>{
         if(token){
             const getTransactions = async () => {
                 if(isAdmin){
-                    const res = await axios.get(`/transactions`, {
+                    const res = await axios.get(`${link}/transactions`, {
                         headers: {Authorization: token}
                     })
                     setTransactions(res.data)
                 } else if(isLogged) {
-                    const res = await axios.get(`transactions/user`, {
+                    const res = await axios.get(`${link}/transactions/user`, {
                         headers: {Authorization: token}
                     })
                     setTransactions(res.data)
@@ -31,7 +32,7 @@ export default function CompAccount(){
             }
             getTransactions()
         }
-    }, [token, callback])
+    }, [token, callback, isAdmin, isLogged, setTransactions])
 
     return (
         <div>

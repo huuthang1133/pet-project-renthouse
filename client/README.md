@@ -9,6 +9,13 @@ This is MERN stack application. It is a small social network app that includes a
 * Login User
 * Register User
 
+# Room
+
+* Get Room
+* Sort
+* Filter
+* Pagination
+
 # Posts
 
 * Post Supports
@@ -19,15 +26,21 @@ This is MERN stack application. It is a small social network app that includes a
 # Edit
 
 * Edit Bills
+* Payment Bills
+* Confirm Bills
+
+# Support
+* Post Support
+* Update Support
 
 # Backend Server
-[Pet-Renthouse](https://pet-project-renthouse.herokuapp.com/)
+[Pet-Renthouse](https://renthouse-pet-project.herokuapp.com/)
 
 # Link Demo
 [Pet-Renthouse](https://0cpxw.csb.app/)
 * Account:
-* Username: admin, password: 123456
-* Username: huuthang113, password: 123456
+* Username: admin@gmail.com, password: 123456
+* Username: user01@gmail.com, password: 123456
 
 # Quick Start
 ## Add a default.json file in config folder with the following:

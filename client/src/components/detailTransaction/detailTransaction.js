@@ -2,11 +2,11 @@ import axios from 'axios';
 import React, {useContext, useEffect, useState} from 'react'
 import { useParams } from 'react-router-dom'
 import {GlobalState} from '../../GlobalState'
-import {Table, Row, Col} from 'reactstrap'
+import {Table} from 'reactstrap'
 import Container from 'reactstrap/lib/Container';
 import BillList from './BillList'
+import {link} from '../../const'
 import './detailTransaction.css'
-
 
 export default function DetailTransaction() {
     const state = useContext(GlobalState)
@@ -20,12 +20,12 @@ export default function DetailTransaction() {
         if(id){
             const getBills = async () => {
                 if(isAdmin) {
-                    const res = await axios.get(`/bills/${id}`, {
+                    const res = await axios.get(`${link}/bills/${id}`, {
                         headers:{Authorization: token}
                     })
                     setBills(res.data)
                 } else {
-                    const res = await axios.get(`/bills/${id}`, {
+                    const res = await axios.get(`${link}/bills/${id}`, {
                         headers:{Authorization: token}
                     })
                     setBills(res.data)
@@ -33,7 +33,7 @@ export default function DetailTransaction() {
             }
             getBills()
         }
-    },[id, callback])
+    },[id, callback, isAdmin, token])
 
 
     if(!bills.length) return <h2>BẠN CHƯA CÓ HÓA ĐƠN ĐẾN KỲ THANH TOÁN</h2>

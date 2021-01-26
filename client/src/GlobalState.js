@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import RoomsAPI from './api/RoomsAPI'
 import UserAPI from './api/UserAPI'
 import axios from 'axios'
+import {link} from './const'
 
 
 export const GlobalState = React.createContext()
@@ -15,7 +16,7 @@ export const DataProvider = ({children}) =>{
         const rf_token = localStorage.getItem('rf_token')
         if(rf_token) {
             const refreshToken  = async () => {
-                const res = await axios.post(`/users/refresh_token`, {rf_token})
+                const res = await axios.post(`${link}/users/refresh_token`, {rf_token})
                 setToken(res.data.accesstoken)
                 setTimeout(() => {
                     refreshToken()
@@ -32,7 +33,8 @@ export const DataProvider = ({children}) =>{
         roomsAPI: RoomsAPI(callback),
         callback: [callback, setCallback],
         transactions: [transactions, setTransactions],
-        supports: [supports, setSupports]
+        supports: [supports, setSupports],
+        link: link
     }
 
     return (

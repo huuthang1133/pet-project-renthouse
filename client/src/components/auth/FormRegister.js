@@ -1,9 +1,9 @@
 import React, {useState} from "react";
-import { Link, useHistory } from "react-router-dom";
 import { toast } from 'react-toastify';
 import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 import axios from 'axios'
 import 'react-toastify/dist/ReactToastify.css';
+import {link} from '../../const'
 
 export default function FormLogin() {
     const [user, setUser] = useState({
@@ -11,7 +11,6 @@ export default function FormLogin() {
         password: "",
         fullName: ""
     }) 
-    const history = useHistory()
     const notifyErr = (message) => toast.error(message)
 
     const handleChangeInput = (e) => {
@@ -22,7 +21,7 @@ export default function FormLogin() {
     const handleRegister = async (e) => {
         e.preventDefault()
         try {
-            const res = await axios.post(`/users/register`, {...user})
+            const res = await axios.post(`${link}/users/register`, {...user})
             localStorage.setItem('rf_token', res.data)
             window.location.href = '/'
         } catch(err){

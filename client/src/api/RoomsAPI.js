@@ -1,5 +1,6 @@
 import {useState, useEffect} from 'react';
 import axios from 'axios'
+import {link} from '../const'
 
 export default function RoomsAPI(callback){
     const [rooms, setRooms] = useState('')
@@ -12,7 +13,7 @@ export default function RoomsAPI(callback){
     useEffect(() => {
         try {
             const getRooms = async () => {
-                const res = await axios.get(`/rooms?limit=${page*9}&${isVacancy}&${sort}&name[regex]=${search}`)
+                const res = await axios.get(`${link}/rooms?limit=${page*9}&${isVacancy}&${sort}&name[regex]=${search}`)
                 setRooms(res.data.rooms)
                 setResult(res.data.result)
             }

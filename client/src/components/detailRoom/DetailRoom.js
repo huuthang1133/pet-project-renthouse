@@ -4,6 +4,7 @@ import {GlobalState} from '../../GlobalState'
 import { Button } from 'reactstrap'
 import './detailRoom.css'
 import axios from 'axios'
+import {link} from '../../const'
 
 export default function DetailRoom(){
     const params = useParams()
@@ -15,7 +16,7 @@ export default function DetailRoom(){
 
     const hireRoom = async () => {
         try {
-            const res = await axios.post(`/transactions`, { id: detailRoom._id}, {
+            const res = await axios.post(`${link}/transactions`, { id: detailRoom._id}, {
                 headers: {Authorization: token }
             })
             alert(res.data.msg)
@@ -34,7 +35,7 @@ export default function DetailRoom(){
                 }
             }
         }
-    }, [params])
+    }, [params, rooms])
 
     return (
         <div className="detail">

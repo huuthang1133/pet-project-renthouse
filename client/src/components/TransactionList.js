@@ -7,12 +7,13 @@ import {Button, Modal, ModalHeader, ModalBody, ModalFooter,   Form,
 
 import { Link, useHistory } from 'react-router-dom'
 import axios from "axios";
+import {link} from '../const'
 
 const TransactionList = ({ transaction }) => {
   const state = useContext(GlobalState)
   const history = useHistory()
   const [token] = state.token
-  const [supports, setSupports] = state.supports
+  const [setSupports] = state.supports
   const [support, setSupport] = useState('')
   const [totalBill, setTotalBill] = useState(0)
   const [totalConfirmBill, setTotalConfirmBill] = useState(0)
@@ -32,19 +33,19 @@ const TransactionList = ({ transaction }) => {
   useEffect(()=> {
     const getSupports = async () => {
       if(isAdmin){
-        const res = await axios.get(`supports`, {
+        const res = await axios.get(`${link}/supports`, {
           headers: {Authorization: token}
         })
         setSupports(res.data)
       } else {
-        const res = await axios.get(`supports/user/${transaction._id}`, {
+        const res = await axios.get(`${link}/supports/user/${transaction._id}`, {
           headers: {Authorization: token}
         })
         setSupports(res.data)
       }
     }
     getSupports()
-  }, [callback])
+  }, [callback, isAdmin, setSupports, token, transaction._id])
 
   useEffect(() => {
     const billComplete = transaction.bills.filter(bill => bill.bill.isComplete === false)
@@ -55,7 +56,7 @@ const TransactionList = ({ transaction }) => {
         setTotalConfirmBill(billConfirm.length)
       }
     }
-  }, [callback])  
+  }, [callback, transaction.bills])  
 
   const handleSupport = (e) => {
     setSupport(e.target.value)
@@ -64,7 +65,7 @@ const TransactionList = ({ transaction }) => {
   const submitSupport = async (e, func) => {
     e.preventDefault()
     try {
-      const res = await axios.post(`/supports/${transaction._id}`, {content: support}, {
+      await axios.post(`${link}/supports/${transaction._id}`, {content: support}, {
         headers: {Authorization: token}
       })
     }
@@ -90,7 +91,7 @@ const TransactionList = ({ transaction }) => {
   const createBill = async (e, func) => {
     e.preventDefault()
     try {
-      await axios.post(`/bills`, {price, bill_date, transactionId: transaction._id}, {
+      await axios.post(`${link}/bills`, {price, bill_date, transactionId: transaction._id}, {
         headers: {Authorization: token}
       })
       setCallback(!callback)

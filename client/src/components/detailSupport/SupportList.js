@@ -3,6 +3,7 @@ import {Button} from 'reactstrap'
 import {GlobalState} from '../../GlobalState'
 import {useParams, useHistory } from 'react-router-dom'
 import axios from 'axios'
+import {link} from '../../const'
 
 
 export default function SupportList({support}){
@@ -20,12 +21,12 @@ export default function SupportList({support}){
             const matchTran = transactions.find(transaction => transaction._id === id)
             if(matchTran._id === support.transaction) setTransaction([matchTran])
         }
-    }, [id, callback])
+    }, [id, callback, transactions, support.transaction])
 
     const updateSupport = async () => {
         try {
             alert('Bạn đã xử lý xong yêu cầu này?')
-            await axios.patch(`/supports/${support._id}`, {
+            await axios.patch(`${link}/supports/${support._id}`, {
                 headers: {Authorization: token}
             })
             history.push('/account')
