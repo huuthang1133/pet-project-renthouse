@@ -1,9 +1,11 @@
 const express = require("express")
 const router = express.Router()
 const cmtController = require('../controllers/comment.controller')
+const auth = require('../middleware/auth.middleware')
+const authAdmin = require('../middleware/auth.middleware')
 
-router.get('/', cmtController.getAll)
-router.post('/', cmtController.createCmts)
+router.get('/', auth, authAdmin, cmtController.getAll)
+router.post('/', auth, cmtController.createCmts)
 router.delete('/:cmtId', cmtController.deleteCmts)
 router.patch('/:cmtId', cmtController.updateCmts)
 

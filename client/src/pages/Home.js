@@ -1,8 +1,8 @@
 import React from "react";
-import { Room } from "../components";
+import {Room}  from "../components";
 
 const Home = ({ history }) => {
-  return <Room history={history} />;
+  return <Room />
 };
 
 export default Home;

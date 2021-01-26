@@ -1,6 +1,6 @@
 import React from "react";
-import { FormLogin } from "../components";
 import { Container, Row, Col } from "reactstrap";
+import FormLogin from '../components/auth/FormLogin'
 
 const LogIn = () => {
   return (

@@ -1,5 +1,5 @@
 import React from "react";
-import { FormRegister } from "../components";
+import FormRegister from '../components/auth/FormRegister'
 import { Container, Row, Col } from "reactstrap";
 
 const Register = () => {

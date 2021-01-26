@@ -1,23 +1,40 @@
 const mongoose = require('mongoose');
 
 const transSchema = mongoose.Schema({
-    userId: String,
+    user: {
+		type: String,
+		required: true,
+		ref: 'User'
+	},
     room: {
-    	_id: String,
-    	isVacancy: Boolean,
-    	name: String
+		type: String,
+		ref: 'Room',
+		required: true,
     },
-    isFinish:Boolean,
-    rent_date : String,
-    bills: [{
-    	price: Object,
-    	isComplete: Boolean,
-    	bill_date: String,
-    	comment: [{
-    		content: String
-    	}]    	
-    }]  
-})
+    isFinish: {
+		type: Boolean,
+		required: true,
+		default: false
+	},
+    rent_date : {
+		type: String,
+		required: true,
+		default: new Date()
+	},
+    bills: [
+		{
+			bill: {
+				type: String,
+				required: true,
+				ref: 'Bill',
+				comment: {
+					type: String,
+					ref: 'Comment'
+				}
+			}
+		}
+	]
+}, {timestamps: true})
 
 let Transaction = mongoose.model('Transaction', transSchema, "transactions");
 module.exports = Transaction

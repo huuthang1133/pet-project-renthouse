@@ -1,16 +1,20 @@
-import React from "react";
-
-import { Route, Redirect } from "react-router-dom";
+import React, {useContext} from "react";
+import { Route, useHistory } from "react-router-dom";
+import {GlobalState} from '../GlobalState'
+import NotFound from '../components/ultils/NotFound'
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
-  const token = localStorage.getItem("cool-jwt");
+  const history = useHistory()
+  const state = useContext(GlobalState)
+  const [isLogged] = state.userAPI.isLogged
+  const [isAdmin] = state.userAPI.isAdmin
+  if(!isLogged && !isAdmin) {
+    return <NotFound />
+  }
   return (
     <Route
       {...rest}
       render={() => {
-        if (!token) {
-          return <Redirect to={{ pathname: "/login" }} />;
-        }
         return <Component />;
       }}
     />

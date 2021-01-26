@@ -1,26 +1,31 @@
 const Comment = require('../models/comment.model');
+const Bill = require('../models/bill.model');
 
 module.exports.getAll = async (req, res)=>{
     try {
         const docs = await Comment.find()
         res.status(200).json(docs)
     } catch(err){
-        res.status(500).json({"Message": err.message})
+        res.status(500).json({msg: err.message})
     }
 }
 
 module.exports.createCmts = async (req, res)=>{
     try {
         const comment = new Comment({
-            idUser: req.body.userId,
+            userId: req.user.id,
             comment: req.body.comment,
         })
         await comment.save()
+
+        await Bill.findByIdAndUpdate({_id: req.body.billId}, { comment: comment._id})
+
         res.status(200).json({
-            message: "Created post successfully"
-        })       
+            message: "Created comment successfully"
+        })
+
     } catch (err){
-        res.status(500).json({"Message": err.message})
+        res.status(500).json({msg: err.message})
     }
 }
 

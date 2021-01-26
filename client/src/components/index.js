@@ -1,11 +1,9 @@
-export { default as TopMenu } from "./TopMenu";
+export { default as TopMenu} from './headers/TopMenu'
 
-export { default as FormLogin } from "./FormLogin";
+export { default as CompAccount} from './compAccount/compAccount'
 
-export { default as FormRegister } from "./FormRegister";
+export { default as detailTransaction} from './detailTransaction/detailTransaction'
 
-export { default as CompAccount } from "./compAccount";
+export { default as detailSupport} from './detailSupport/detailSupport'
 
-export { default as AdminAccount } from "./adminAccount";
-
-export { default as Room } from "./Room";
+export {default as Room} from './Rooms/Room'

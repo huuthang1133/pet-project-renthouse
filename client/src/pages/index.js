@@ -7,3 +7,5 @@ export { default as Register } from "./Register";
 export { default as Account } from "./Account";
 
 export { default as Admin } from "./Admin";
+
+export {default as DetailRoomPage} from './DetailRoom'

@@ -10,19 +10,20 @@ app.use(cors())
 mongoose.connect(process.env.MONGOOSE_URL, {useNewUrlParser: true,
     useUnifiedTopology: true})
 
-// mongoose.connection.on('connected', function(){
-//     console.log('conneted')
-// })
+mongoose.connection.on('connected', function(){
+    console.log('conneted')
+})
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 5000
 
 let userRoute = require('./api/routes/user.route');
 let transRoute = require('./api/routes/transaction.route');
 let cmtRoute = require('./api/routes/comment.route');
 let supportRoute = require('./api/routes/support.route');
 let roomRoute = require('./api/routes/room.route');
+let billRoute = require('./api/routes/bill.route');
 
 
 //Handling CORS (Cross Origin Resource Sharing)
@@ -40,6 +41,9 @@ app.use('/users', userRoute);
 app.use('/rooms', roomRoute);
 app.use('/comments', cmtRoute);
 app.use('/supports', supportRoute);
+app.use('/bills', billRoute);
+
+
 // Handling Errors
 app.use((req,res,next)=>{
     const error = new Error('Not Found!');
