@@ -13,7 +13,7 @@ const TransactionList = ({ transaction }) => {
   const state = useContext(GlobalState)
   const history = useHistory()
   const [token] = state.token
-  const [setSupports] = state.supports
+  const [supports, setSupports] = state.supports
   const [support, setSupport] = useState('')
   const [totalBill, setTotalBill] = useState(0)
   const [totalConfirmBill, setTotalConfirmBill] = useState(0)

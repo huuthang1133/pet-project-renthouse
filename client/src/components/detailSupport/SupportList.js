@@ -21,7 +21,7 @@ export default function SupportList({support}){
             const matchTran = transactions.find(transaction => transaction._id === id)
             if(matchTran._id === support.transaction) setTransaction([matchTran])
         }
-    }, [id, callback, transactions, support.transaction])
+    }, [id, callback, support.transaction, transactions])
 
     const updateSupport = async () => {
         try {
