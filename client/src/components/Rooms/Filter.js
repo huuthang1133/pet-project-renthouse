@@ -19,7 +19,6 @@ function Filters() {
             <Col xs='9'>
                 <Row>
                     <div className="row">
-                        <div>LỌC: </div>
                         <select name="isVacancy" value={isVacancy} onChange={hanleIsVacancy} >
                             <option value=''>TẤT CẢ</option>
                             <option value={`isVacancy=${true}`}>TRỐNG</option>
@@ -31,7 +30,6 @@ function Filters() {
                 </Row>
             </Col>
             <Col xs='3' className='row_sort'>
-                <div>CHỌN </div>
                 <select value={sort} onChange={e => setSort(e.target.value)} >
                     <option value=''>MỚI</option>
                     <option value='sort=oldest'>CŨ</option>
